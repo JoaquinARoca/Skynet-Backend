@@ -1,0 +1,22 @@
+name: Build and Push Backend
+
+on:
+  push:
+    branches: [ develop ]
+    
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Docker login
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER-USERNAME }}" --password-stdin
+
+    - name: Build and push image
+      run: |
+        docker build -t jthort00/skynet-backend:latest .
+        docker push jthort00/skynet-backend:latest
+      
