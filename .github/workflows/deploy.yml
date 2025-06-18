@@ -2,7 +2,9 @@ name: Build and Push Backend
 
 on:
   push:
-    branches: [ develop ]
+    branches: 
+      - develop
+      - production
     
 jobs:
   build-and-push:
